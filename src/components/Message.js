@@ -8,10 +8,10 @@ class Message extends React.Component {
     const message = this.props.message
 
     return (
-      <div>
-        <div>{message.name}</div>
-        <div>{message.description}</div>
-      </div>
+      <p>
+        <strong>{message.name}:</strong><br />
+        {message.message}
+      </p>
     )
   }
 }
