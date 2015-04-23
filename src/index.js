@@ -61,6 +61,12 @@ function createFirebaseContainer(Component, params) {
   }
 }
 
+class Api {
+  static Message(id) {
+    return `messages/${id}`
+  }
+}
+
 class Loader extends React.Component {
   render() {
     return <div>Loading</div>
@@ -69,7 +75,12 @@ class Loader extends React.Component {
 
 class MessageComponent extends React.Component {
   render() {
-    return <div>{this.props.message.name}</div>
+    return (
+      <div>
+        <div>{this.props.message.name}</div>
+        <div>{this.props.message.description}</div>
+      </div>
+    )
   }
 }
 
@@ -78,7 +89,7 @@ const Message = createFirebaseContainer(MessageComponent, {
 
   subscribeTo: {
     message(props) {
-      return `/messages/${props.id}`
+      return Api.Message(props.id)
     }
   }
 })
