@@ -1,6 +1,7 @@
 import React from 'react'
 import Firebase from 'firebase'
 import difference from 'lodash/array/difference'
+import map from 'lodash/collection/map'
 import mapValues from 'lodash/object/mapValues'
 import forEach from 'lodash/collection/forEach'
 
@@ -61,12 +62,6 @@ function createFirebaseContainer(Component, params) {
   }
 }
 
-class Api {
-  static Message(id) {
-    return `messages/${id}`
-  }
-}
-
 class Loader extends React.Component {
   render() {
     return <div>Loading</div>
@@ -89,7 +84,27 @@ const Message = createFirebaseContainer(MessageComponent, {
 
   subscribeTo: {
     message(props) {
-      return Api.Message(props.id)
+      return `messages/${props.id}`
+    }
+  }
+})
+
+class FeedComponent extends React.Component {
+  render() {
+    const items = map(this.props.feed, (value, key) => {
+      return <Message key={key} id={key} />
+    })
+
+    return <div>{items}</div>
+  }
+}
+
+const Feed = createFirebaseContainer(FeedComponent, {
+  loader: <Loader />,
+
+  subscribeTo: {
+    feed(props) {
+      return `feed`
     }
   }
 })
@@ -119,7 +134,7 @@ class MessageList extends React.Component {
           <button onClick={this.toggleShow.bind(this)}>{toggleLabel}</button>
         </div>
 
-        {this.state.show && <Message id="0" />}
+        {this.state.show && <Feed />}
       </div>
     )
   }
