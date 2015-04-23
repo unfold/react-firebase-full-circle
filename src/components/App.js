@@ -1,8 +1,8 @@
 import React from 'react'
 
-import Feed from './components/Feed'
+import Feed from './Feed'
 
-class App extends React.Component {
+export default class App extends React.Component {
   constructor() {
     super()
 
@@ -22,17 +22,12 @@ class App extends React.Component {
 
     return (
       <div>
-        <div>
-          Message list
-          <button onClick={this.toggleShow.bind(this)}>{toggleLabel}</button>
-        </div>
+        <h1>
+          Feed <button onClick={this.toggleShow.bind(this)}>{toggleLabel}</button>
+        </h1>
 
         {this.state.show && <Feed />}
       </div>
     )
   }
 }
-
-window.addEventListener('load', () => {
-  React.render(<App />, document.body)
-})
