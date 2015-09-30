@@ -3,8 +3,8 @@ import React from 'react'
 import Feed from './Feed'
 
 export default class App extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       show: true

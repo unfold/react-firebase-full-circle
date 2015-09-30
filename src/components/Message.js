@@ -1,9 +1,19 @@
 import React from 'react'
 
 import Loader from './Loader'
-import createFirebaseContainer from '../createFirebaseContainer'
+import firebase from '../decorators/firebase'
 
-class Message extends React.Component {
+@firebase({
+  loader: <Loader>Loading message...</Loader>,
+
+  subscribeTo: {
+    message(props) {
+      return `messages/${props.id}`
+    }
+  }
+})
+
+export default class Message extends React.Component {
   render() {
     const message = this.props.message
 
@@ -15,13 +25,3 @@ class Message extends React.Component {
     )
   }
 }
-
-export default createFirebaseContainer(Message, {
-  loader: <Loader>Loading message...</Loader>,
-
-  subscribeTo: {
-    message(props) {
-      return `messages/${props.id}`
-    }
-  }
-})

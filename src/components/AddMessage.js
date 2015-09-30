@@ -3,7 +3,9 @@ import React from 'react'
 import actions from '../actions'
 
 export default class AddMessage extends React.Component {
-  constructor() {
+  constructor(props) {
+    super(props);
+
     this.state = {
       name: '',
       message: ''
