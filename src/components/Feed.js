@@ -7,13 +7,9 @@ import AddMessage from './AddMessage'
 import firebase from '../decorators/firebase'
 
 @firebase({
-  loader: <Loader>Loading feed...</Loader>,
-
-  subscribeTo: {
-    feed(props) {
-      return `feed`
-    }
-  }
+  feed: `feed`
+}, {
+  placeholder: <Loader>Loading feed...</Loader>
 })
 
 export default class Feed extends React.Component {

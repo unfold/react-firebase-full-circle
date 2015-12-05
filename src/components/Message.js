@@ -4,13 +4,9 @@ import Loader from './Loader'
 import firebase from '../decorators/firebase'
 
 @firebase({
-  loader: <Loader>Loading message...</Loader>,
-
-  subscribeTo: {
-    message(props) {
-      return `messages/${props.id}`
-    }
-  }
+  message: ({id}) => `messages/${id}`
+}, {
+  placeholder: <Loader>Loading message...</Loader>
 })
 
 export default class Message extends React.Component {
